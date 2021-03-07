@@ -1,0 +1,18 @@
+.chart-lingkaran{
+    height: 30px;
+    background-color: blue;
+    color: white;
+    text-align: center;
+}
+.chart-persegi{
+    height: 30px;
+    background-color: red;
+    color: white;
+    text-align: center;
+}
+.chart-segitiga{
+    height: 30px;
+    background-color: green;
+    color: white;
+    text-align: center;
+}
