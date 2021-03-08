@@ -11,7 +11,11 @@ $file_persegi = "persegi/persegi.json";
 $persegi = file_get_contents($file_persegi);
 $data_persegi = json_decode($persegi, true);
 
-$count
+$counttotal = count($data_lingkaran) + count($data_persegi) + count($data_segitiga);
+
+$persentaselingkaran = count($data_lingkaran) / $counttotal * 100;
+$persentasesegitiga = count($data_segitiga) / $counttotal * 100;
+$persentasepersegi = count($data_persegi) / $counttotal * 100;
 ?>
 <!doctype html>
 <html lang="en">
@@ -46,25 +50,33 @@ $count
 </div>
 
     <div class="container mt-5">
-      <h4>Diagram Batang</h4>
-      <table class="mt-4">
-        <tr>
-          <td valign="bottom">
-            <div class="text-white text-center" style="width:40px; height:<?= count($data_lingkaran)*50 ?>px; background-color:red;"><?= count($data_lingkaran)?></div>
-          </td>
-          <td valign="bottom">
-            <div class="text-white text-center" style="width:40px; height:<?= count($data_segitiga)*50 ?>px; background-color:green;"><?= count($data_segitiga)?></div>
-          </td>
-          <td valign="bottom">
-            <div class="text-white text-center" style="width:40px; height:<?= count($data_persegi)*50 ?>px; background-color:blue;"><?= count($data_persegi)?></div>
-          </td>
-        </tr>
-        <tr>
-          <th>Lingkaran &nbsp;&nbsp;</th>
-          <th>Segitiga &nbsp;&nbsp;</th>
-          <th>Persegi</th>
-        </tr>
-      </table>
+        <h4>Diagram Batang</h4>
+        <table class="mt-4">
+          <tr>
+            <td valign="bottom">
+              <div class="text-white text-center" style="width:40px; height:<?= count($data_lingkaran)*50 ?>px; background-color:red;"><?= count($data_lingkaran)?></div>
+            </td>
+            <td valign="bottom">
+              <div class="text-white text-center" style="width:40px; height:<?= count($data_segitiga)*50 ?>px; background-color:green;"><?= count($data_segitiga)?></div>
+            </td>
+            <td valign="bottom">
+              <div class="text-white text-center" style="width:40px; height:<?= count($data_persegi)*50 ?>px; background-color:blue;"><?= count($data_persegi)?></div>
+            </td>
+          </tr>
+          <tr>
+            <th>Lingkaran &nbsp;&nbsp;</th>
+            <th>Segitiga &nbsp;&nbsp;</th>
+            <th>Persegi</th>
+          </tr>
+        </table>
+
+        <br><br>
+        <h4>Persentase</h4>
+        <div class="bg-light d-flex align-items-center" style="width:100%;">
+          <div class="d-inline-block text-center" style="width:<?= $persentaselingkaran ?>%; background-color:red; color:white;"><?= round($persentaselingkaran) ?> %</div>
+          <div class="d-inline-block text-center"  style="width:<?= $persentasesegitiga ?>%; background-color:green; color:white;"><?= round($persentasesegitiga) ?> %</div>
+          <div class="d-inline-block text-center"  style="width:<?= $persentasepersegi ?>%; background-color:blue; color:white;"><?= round($persentasepersegi) ?> %</div>
+        </div>
     </div>
 
     <!-- Optional JavaScript -->
