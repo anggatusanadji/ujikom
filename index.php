@@ -10,6 +10,8 @@ $data_segitiga = json_decode($segitiga, true);
 $file_persegi = "persegi/persegi.json";
 $persegi = file_get_contents($file_persegi);
 $data_persegi = json_decode($persegi, true);
+
+$count
 ?>
 <!doctype html>
 <html lang="en">
@@ -28,48 +30,41 @@ $data_persegi = json_decode($persegi, true);
 
 <!-- Header -->
 <div class="container-fluid bg-light">
-<div class="container">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding:10px 0px">
-    <a class="navbar-brand" href="/">Bangun Ruang</a>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav ml-auto">
-        <!-- <a class="nav-item nav-link active" href="#">Home</a> -->
-        <a class="nav-item nav-link" href="lingkaran/lingkaran.php">Lingkaran</a>
-        <a class="nav-item nav-link" href="segitiga/segitiga.php">Segitiga</a>
-        <a class="nav-item nav-link" href="persegi/persegi.php">Persegi</a>
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding:10px 0px">
+      <a class="navbar-brand" href="/">Bangun Ruang</a>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ml-auto">
+          <!-- <a class="nav-item nav-link active" href="#">Home</a> -->
+          <a class="nav-item nav-link" href="lingkaran/lingkaran.php">Lingkaran</a>
+          <a class="nav-item nav-link" href="segitiga/segitiga.php">Segitiga</a>
+          <a class="nav-item nav-link" href="persegi/persegi.php">Persegi</a>
+        </div>
       </div>
-    </div>
-  </nav>
-</div>
+    </nav>
+  </div>
 </div>
 
-    <div class="container">
-      <div class ="row">
-        <div class="col-2">
-          <p>Data Lingkaran</p>
-        </div>
-        <div class="col-10">
-          <div class="chart-lingkaran" style="width:<?= count($data_lingkaran) ?>0mm"><?= count($data_lingkaran) ?></div>
-        </div>
-      </div>
-      <br>
-      <div class ="row">
-        <div class="col-2">
-          <p>Data Segitiga</p>
-        </div>
-        <div class="col-10">
-          <div class="chart-segitiga" style="width:<?= count($data_segitiga) ?>0mm;"><?= count($data_segitiga) ?></div>
-        </div>        
-      </div>
-      <br>
-      <div class ="row">
-        <div class="col-2">
-          <p>Data Persegi</p>
-        </div>
-        <div class="col-10">
-          <div class="chart-persegi" style="width:<?= count($data_persegi) ?>0mm"><?= count($data_persegi) ?></div>
-        </div>
-      </div>
+    <div class="container mt-5">
+      <h4>Diagram Batang</h4>
+      <table class="mt-4">
+        <tr>
+          <td valign="bottom">
+            <div class="text-white text-center" style="width:40px; height:<?= count($data_lingkaran)*50 ?>px; background-color:red;"><?= count($data_lingkaran)?></div>
+          </td>
+          <td valign="bottom">
+            <div class="text-white text-center" style="width:40px; height:<?= count($data_segitiga)*50 ?>px; background-color:green;"><?= count($data_segitiga)?></div>
+          </td>
+          <td valign="bottom">
+            <div class="text-white text-center" style="width:40px; height:<?= count($data_persegi)*50 ?>px; background-color:blue;"><?= count($data_persegi)?></div>
+          </td>
+        </tr>
+        <tr>
+          <th>Lingkaran &nbsp;&nbsp;</th>
+          <th>Segitiga &nbsp;&nbsp;</th>
+          <th>Persegi</th>
+        </tr>
+      </table>
     </div>
 
     <!-- Optional JavaScript -->

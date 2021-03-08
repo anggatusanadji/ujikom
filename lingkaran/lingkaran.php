@@ -4,6 +4,21 @@ $file = "lingkaran.json";
 $lingkaran = file_get_contents($file);
 // Mendecode lingkaran.json
 $data = json_decode($lingkaran, true);
+
+if($data !== null){
+  function date_compare($data1, $data2) { 
+    if (strtotime($data1['created_at']) < strtotime($data2['created_at'])) 
+      return 1; 
+    else if (strtotime($data1['created_at']) > strtotime($data2['created_at']))  
+      return -1; 
+    else
+      return 0; 
+  }  
+  // Sort the array  
+  usort($data, 'date_compare'); 
+}
+
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -23,7 +38,7 @@ $data = json_decode($lingkaran, true);
 <div class="container-fluid bg-light">
 <div class="container">
   <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding:10px 0px">
-    <a class="navbar-brand" href="">Bangun Ruang</a>
+    <a class="navbar-brand" href="../index.php">Bangun Ruang</a>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav ml-auto">
         <!-- <a class="nav-item nav-link active" href="#">Home</a> -->
@@ -37,14 +52,19 @@ $data = json_decode($lingkaran, true);
 </div>
 
     <div class="container">
-      <div class="btn-toolbar">
-        <a class="btn btn-primary my-3" href="create.php"><i class="icon-plus"></i> Insert Data</a>
-        <div class="btn-group"> </div>
+    <form method = "POST" action = "lingkaran-action.php" class="mt-3">   
+      <div class = "form-group">
+        <label for   = "inputJari">Jari-jari</label>
+        <input type  = "number" required = "required" class = "form-control" id = "inputJari" name = "jari" placeholder = "Masukkan jari-jari (cm)">
+        <div class = "form-actions mt-1">
+          <button type  = "submit" class = "btn btn-primary" name="lingkaran-submit">Submit</button>
+        </div>
       </div>
+    </form>
 
     <div class ="row">
       <div class="col-12">
-      <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+      <table class="table table-bordered table-striped">
         <thead>
           <tr>
             <th>No.</th>
@@ -52,20 +72,33 @@ $data = json_decode($lingkaran, true);
             <th>Jari-jari</th>
             <th>Luas Lingkaran</th>
             <th>Tanggal</th>
+            <th>Aksi</th>
           </tr> 
         </thead>
 
         <tbody>
           <?php $no = 0; $no++ ?>
+          <?php if($data !== null && $data !== []): ?>
           <?php foreach($data as $dt):  ?>
           <tr>
             <td><?php echo $no++; ?></td>
             <td><?php echo $dt['phi']; ?></td>
-            <td><?php echo $dt['jari']; ?></td>
-            <td><?php echo $dt['luas']; ?></td>
+            <td><?php echo $dt['jari']; ?> cm</td>
+            <td><?php echo $dt['luas']; ?> cm<sub>2</sub></td>
             <td><?php echo $dt['created_at']; ?></td>
+            <td>
+            <form action="lingkaran-delete.php" onsubmit="return confirm('Yakin hapus data?')"">
+              <input type="hidden" name="id" value="<?= $dt['id']?>">
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+            </td>
           </tr>
           <?php endforeach; ?>
+          <?php else: ?> 
+          <tr>
+            <td>Tidak Ada Data</td>
+          </tr>
+          <?php endif; ?> 
         </tbody>      
       </table>
       </div> 

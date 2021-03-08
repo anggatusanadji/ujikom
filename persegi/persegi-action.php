@@ -4,11 +4,13 @@ $persegi = file_get_contents($file);
 $data = json_decode($persegi, true);
 
 date_default_timezone_set('Asia/Singapore');
+$id = rand();
 $sisi = $_POST['sisi'];
 $luas = $sisi*$sisi;
 $date = date('d-m-Y h:i:s');
 if (isset($_POST["persegi-submit"])){
-    $data[] = array(
+    $data[$id] = array(
+        'id' => $id,
         'sisi' => $sisi,
         'luas' => $luas,
         'created_at' => $date

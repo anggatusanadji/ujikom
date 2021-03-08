@@ -10,7 +10,7 @@ $jari = $_POST['jari'];
 $luas = $phi*($jari*$jari);
 $date = date('d-m-Y h:i:s');
 if (isset($_POST["lingkaran-submit"])){
-    $data[] = array(
+    $data[$id] = array(
         'id' => $id,
         'phi' => $phi,
         'jari' => $jari,
