@@ -1,13 +1,14 @@
 <?php
-$file = "persegi.json";
-$persegi = file_get_contents($file);
-$data = json_decode($persegi, true);
+require '../function/control.php';
+
+// Mangambil data dari array json dan mengubah menjadi variabel php
+$data = get("persegi.json");
 
 date_default_timezone_set('Asia/Singapore');
 $id = rand();
 $sisi = $_POST['sisi'];
 $luas = $sisi*$sisi;
-$date = date('d-m-Y h:i:s');
+$date = date('d-m-Y H:i:s');
 if (isset($_POST["persegi-submit"])){
     $data[$id] = array(
         'id' => $id,
@@ -15,10 +16,10 @@ if (isset($_POST["persegi-submit"])){
         'luas' => $luas,
         'created_at' => $date
     );
-    // Mengencode data menjadi json
-    $jsonfile = json_encode($data, JSON_PRETTY_PRINT);
-    // Menyimpan data ke dalam anggota.json
-    file_put_contents('persegi.json', $jsonfile);
+
+    // Mengirim data dan Mengencode data menjadi json
+    send($data,'persegi.json');
+
     header("location:persegi.php");
 };
 ?>

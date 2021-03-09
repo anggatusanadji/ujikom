@@ -1,9 +1,8 @@
 <?php
-$file = "lingkaran.json";
-// Mendapatkan file json
-$lingkaran = file_get_contents($file);
-// Mendecode lingkaran.json
-$data = json_decode($lingkaran, true);
+require '../function/control.php';
+
+// Mangambil data dari array json dan mengubah menjadi variabel php
+$data = get("lingkaran.json");
 
 if($data !== null){
   function date_compare($data1, $data2) { 

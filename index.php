@@ -11,11 +11,15 @@ $file_persegi = "persegi/persegi.json";
 $persegi = file_get_contents($file_persegi);
 $data_persegi = json_decode($persegi, true);
 
+$countlingkaran = count($data_lingkaran);
+$countsegitiga = count($data_segitiga);
+$countpersegi = count($data_persegi);
 $counttotal = count($data_lingkaran) + count($data_persegi) + count($data_segitiga);
 
 $persentaselingkaran = count($data_lingkaran) / $counttotal * 100;
 $persentasesegitiga = count($data_segitiga) / $counttotal * 100;
 $persentasepersegi = count($data_persegi) / $counttotal * 100;
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -36,7 +40,7 @@ $persentasepersegi = count($data_persegi) / $counttotal * 100;
 <div class="container-fluid bg-light">
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding:10px 0px">
-      <a class="navbar-brand" href="/">Bangun Ruang</a>
+      <a class="navbar-brand" href="/">Bangun Datar</a>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ml-auto">
           <!-- <a class="nav-item nav-link active" href="#">Home</a> -->
@@ -50,32 +54,66 @@ $persentasepersegi = count($data_persegi) / $counttotal * 100;
 </div>
 
     <div class="container mt-5">
-        <h4>Diagram Batang</h4>
-        <table class="mt-4">
-          <tr>
-            <td valign="bottom">
-              <div class="text-white text-center" style="width:40px; height:<?= count($data_lingkaran)*50 ?>px; background-color:red;"><?= count($data_lingkaran)?></div>
-            </td>
-            <td valign="bottom">
-              <div class="text-white text-center" style="width:40px; height:<?= count($data_segitiga)*50 ?>px; background-color:green;"><?= count($data_segitiga)?></div>
-            </td>
-            <td valign="bottom">
-              <div class="text-white text-center" style="width:40px; height:<?= count($data_persegi)*50 ?>px; background-color:blue;"><?= count($data_persegi)?></div>
-            </td>
-          </tr>
-          <tr>
-            <th>Lingkaran &nbsp;&nbsp;</th>
-            <th>Segitiga &nbsp;&nbsp;</th>
-            <th>Persegi</th>
-          </tr>
-        </table>
+      <div class="row">
+        <div class="col-4">
+          <h4>Diagram Batang</h4>
+          <table class="mt-4">
+            <tr>
+              <td valign="bottom">
+                <div class="text-white text-center" style="width:40px; height:<?= $countlingkaran*10 ?>px; background-color:red;"><?= count($data_lingkaran)?></div>
+              </td>
+              <td valign="bottom">
+                <div class="text-white text-center" style="width:40px; height:<?= $countsegitiga*10 ?>px; background-color:green;"><?= count($data_segitiga)?></div>
+              </td>
+              <td valign="bottom">
+                <div class="text-white text-center" style="width:40px; height:<?= $countpersegi*10 ?>px; background-color:blue;"><?= count($data_persegi)?></div>
+              </td>
+            </tr>
+            <tr>
+              <th>Lingkaran &nbsp;&nbsp;</th>
+              <th>Segitiga &nbsp;&nbsp;</th>
+              <th>Persegi</th>
+            </tr>
+          </table>
+        </div>
+        <div class="col-8 p-0 mb-4">
+          <div class="row">
+            <div class="col-12">
+              <div class="card" style="width: 100%;">
+                <div class="card-body text-center">
+                  <p class="card-title" style="font-size:20px">Total perhitungan dari seluruh bangun datar</p>
+                  <h4 class="card-text"><?= $counttotal;?></h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 py-2 pr-1">
+              <div class="card " style="width: 100%;">
+                <div class="card-body text-center">
+                  <p class="card-title" style="font-size:20px">Nilai Maksimum</p>
+                  <h4><?= max($countlingkaran,$countpersegi,$countsegitiga)?></h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 py-2 pl-1">
+              <div class="card " style="width: 100%;">
+                <div class="card-body text-center">
+                  <p class="card-title" style="font-size:20px">Nilai Minimum</p>
+                  <h4><?= min($countlingkaran,$countpersegi,$countsegitiga)?></h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
         <br><br>
         <h4>Persentase</h4>
         <div class="bg-light d-flex align-items-center" style="width:100%;">
-          <div class="d-inline-block text-center" style="width:<?= $persentaselingkaran ?>%; background-color:red; color:white;"><?= round($persentaselingkaran) ?> %</div>
-          <div class="d-inline-block text-center"  style="width:<?= $persentasesegitiga ?>%; background-color:green; color:white;"><?= round($persentasesegitiga) ?> %</div>
-          <div class="d-inline-block text-center"  style="width:<?= $persentasepersegi ?>%; background-color:blue; color:white;"><?= round($persentasepersegi) ?> %</div>
+          <div class="d-inline-block text-center" style="width:<?= $persentaselingkaran ?>%; background-color:red; color:white;">(lingkaran) <?= round($persentaselingkaran,2) ?> %</div>
+          <div class="d-inline-block text-center"  style="width:<?= $persentasesegitiga ?>%; background-color:green; color:white;">(segitiga) <?= round($persentasesegitiga,2) ?> %</div>
+          <div class="d-inline-block text-center"  style="width:<?= $persentasepersegi ?>%; background-color:blue; color:white;">(persegi) <?= round($persentasepersegi,2) ?> %</div>
         </div>
     </div>
 

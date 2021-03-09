@@ -1,14 +1,15 @@
 <?php
-$file = "lingkaran.json";
-$lingkaran = file_get_contents($file);
-$data = json_decode($lingkaran, true);
+require '../function/control.php';
+
+// Mangambil data dari array json dan mengubah menjadi variabel php
+$data = get("lingkaran.json");
 
 date_default_timezone_set('Asia/Singapore');
 $id = rand();
 $phi = 3.14;
 $jari = $_POST['jari'];
 $luas = $phi*($jari*$jari);
-$date = date('d-m-Y h:i:s');
+$date = date('d-m-Y H:i:s');
 if (isset($_POST["lingkaran-submit"])){
     $data[$id] = array(
         'id' => $id,
@@ -17,10 +18,10 @@ if (isset($_POST["lingkaran-submit"])){
         'luas' => $luas,
         'created_at' => $date
     );
-    // Mengencode data menjadi json
-    $jsonfile = json_encode($data, JSON_PRETTY_PRINT);
-    // Menyimpan data ke dalam anggota.json
-    file_put_contents('lingkaran.json', $jsonfile);
+
+    // Mengirim data dan Mengencode data menjadi json
+    send($data,'lingkaran.json');
+
     header("location:lingkaran.php");
 };
 ?>

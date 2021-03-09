@@ -1,9 +1,8 @@
 <?php
-$file = "persegi.json";
-// Mendapatkan file json
-$persegi = file_get_contents($file);
-// Mendecode persegi.json
-$data = json_decode($persegi, true);
+require '../function/control.php';
+
+// Mangambil data dari array json dan mengubah menjadi variabel php
+$data = get("persegi.json");
 
 if($data !== null){
   function date_compare($data1, $data2) { 

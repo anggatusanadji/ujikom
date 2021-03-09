@@ -1,9 +1,7 @@
 <?php
-$file = "segitiga.json";
-// Mendapatkan file json
-$segitiga = file_get_contents($file);
-// Mendecode segitiga.json
-$data = json_decode($segitiga, true);
+require "../function/control.php";
+
+$data = get("segitiga.json");
 
 if($data !== null){
   function date_compare($data1, $data2) { 
