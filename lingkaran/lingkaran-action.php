@@ -2,25 +2,21 @@
 require '../function/control.php';
 
 // Mangambil data dari array json dan mengubah menjadi variabel php
-$data = get("lingkaran.json");
+$file = "lingkaran.json";
 
 date_default_timezone_set('Asia/Singapore');
-$id = rand();
-$phi = 3.14;
-$jari = $_POST['jari'];
-$luas = $phi*($jari*$jari);
-$date = date('d-m-Y H:i:s');
+$id = rand_id();
+
 if (isset($_POST["lingkaran-submit"])){
-    $data[$id] = array(
+    $data = array(
         'id' => $id,
-        'phi' => $phi,
-        'jari' => $jari,
-        'luas' => $luas,
-        'created_at' => $date
+        'phi' => round(pi(), 2),
+        'jari' => $_POST['jari'],
+        'luas' => round(luas_lingkaran($_POST['jari']), 2),
+        'created_at' => date('d-m-Y H:i:s')
     );
 
-    // Mengirim data dan Mengencode data menjadi json
-    send($data,'lingkaran.json');
+    $insert = insert_data($id, $data, $file);
 
     header("location:lingkaran.php");
 };

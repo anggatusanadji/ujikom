@@ -1,27 +1,20 @@
 <?php
 
 require '../function/control.php';
-
-// Mangambil data dari array json dan mengubah menjadi variabel php
-$data = get("segitiga.json");
+$file = "segitiga.json";
 
 date_default_timezone_set('Asia/Singapore');
-$id = rand();
-$alas = $_POST['alas'];
-$tinggi = $_POST['tinggi'];
-$luas = $alas*$tinggi/2;
+$id = rand_id();
+
 if (isset($_POST["segitiga-submit"])){
-    $data[$id] = array(
+    $data = array(
         'id' => $id,
-        'alas' => $alas,
-        'tinggi' => $tinggi,
-        'luas' => $luas,
-        'created_at' => $date
+        'alas' => $_POST['alas'],
+        'tinggi' => $_POST['tinggi'],
+        'luas' => luas_segitiga($_POST['alas'], $_POST['tinggi']),
+        'created_at' => date('d-m-Y H:i:s')
     ); 
-
-// Mengirim data dan Mengencode data menjadi json
-send($data,'segitiga.json');
-
+$insert = insert_data($id, $data, $file);
 header("location:segitiga.php");
 };
 ?>

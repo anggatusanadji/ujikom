@@ -1,7 +1,9 @@
 <?php
 require "../function/control.php";
 
-$data = get("segitiga.json");
+$file = "segitiga.json";
+
+$data = get($file);
 
 if($data !== null){
   function date_compare($data1, $data2) { 
@@ -36,7 +38,7 @@ if($data !== null){
     <div class="container-fluid bg-light">
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding:10px 0px">
-        <a class="navbar-brand" href="../index.php">Bangun Ruang</a>
+        <a class="navbar-brand" href="../index.php">Bangun Datar</a>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav ml-auto">
             <!-- <a class="nav-item nav-link active" href="#">Home</a> -->
